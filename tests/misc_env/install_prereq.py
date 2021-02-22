@@ -201,7 +201,7 @@ def registry_login(ceph, distro_ver):
         ceph.exec_command(cmd="sudo systemctl restart docker", long_running=True)
 
     ceph.exec_command(
-        cmd="sudo {c} login -u {u} -p {p} registry.redhat.io".format(
+        cmd="sudo {c} login -u='{u}' -p='{p}' registry.redhat.io".format(
             c=container, u=user, p=pwd
         ),
         check_ec=True,
