@@ -17,7 +17,7 @@ def config_dict_to_string(data: Dict) -> str:
         rtn += f" -{key}" if len(key) == 1 else f" --{key}"
 
         if not isinstance(value, bool):
-            rtn += f" {value}"
+            rtn += f"='{value}'"
 
     return rtn
 
