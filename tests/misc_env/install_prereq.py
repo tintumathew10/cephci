@@ -39,12 +39,20 @@ def run(**kw):
     skip_subscription = config.get("skip_subscription", False)
     enable_eus = config.get("enable_eus", False)
     repo = config.get("add-repo", False)
+    hotfix_repo = config.get("hotfix_repo", False)
     rhbuild = config.get("rhbuild")
 
     with parallel() as p:
         for ceph in ceph_nodes:
             p.spawn(
-                install_prereq, ceph, 1800, skip_subscription, repo, rhbuild, enable_eus
+                install_prereq,
+                ceph,
+                1800,
+                skip_subscription,
+                repo,
+                rhbuild,
+                enable_eus,
+                hotfix_repo,
             )
             time.sleep(20)
     return 0
@@ -57,6 +65,7 @@ def install_prereq(
     repo=False,
     rhbuild=None,
     enable_eus=False,
+    hotfix_repo=None,
 ):
     log.info("Waiting for cloud config to complete on " + ceph.hostname)
     ceph.exec_command(cmd="while [ ! -f /ceph-qa-ready ]; do sleep 15; done")
@@ -86,6 +95,8 @@ def install_prereq(
                 enable_rhel_rpms(ceph, distro_ver)
         if repo:
             setup_addition_repo(ceph, repo)
+        if hotfix_repo:
+            setup_hotfix_repo(ceph, hotfix_repo)
         # TODO enable only python3 rpms on both rhel7 &rhel8 once all component suites(rhcs3,4) are comptatible
         if distro_ver.startswith("8"):
             rpm_all_packages = rpm_packages.get("py3") + ["net-tools"]
@@ -110,6 +121,26 @@ def setup_addition_repo(ceph, repo):
     ceph.exec_command(
         sudo=True,
         cmd="curl -o /etc/yum.repos.d/rh_add_repo.repo {repo}".format(repo=repo),
+    )
+    ceph.exec_command(sudo=True, cmd="yum update metadata", check_ec=False)
+
+
+def setup_hotfix_repo(ceph, hotfix_repo):
+    """
+    Saves the given repo at /etc/yum.repos.d/rh_hotfix_repo.repo
+    Args:
+      ceph: ceph object
+      hotfix_repo: URL to .repo file
+
+    """
+    log.info(
+        "Adding hotfix repo {repo} to {sn}".format(repo=hotfix_repo, sn=ceph.shortname)
+    )
+    ceph.exec_command(
+        sudo=True,
+        cmd="curl -o /etc/yum.repos.d/rh_hotfix_repo.repo {repo}".format(
+            repo=hotfix_repo
+        ),
     )
     ceph.exec_command(sudo=True, cmd="yum update metadata", check_ec=False)
 
