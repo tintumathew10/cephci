@@ -88,7 +88,7 @@ def install_prereq(
     log.info(
         "distro version_id: {version_id}".format(version_id=distro_info["VERSION_ID"])
     )
-    ceph_cluster.setup_packages(
+    ceph.setup_packages(
         base_url, hotfix_repo, installer_url, ubuntu_repo, rhbuild
     )
     if ceph.pkg_type == "deb":
