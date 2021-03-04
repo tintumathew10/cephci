@@ -107,8 +107,6 @@ def install_prereq(
                 enable_rhel_rpms(ceph, distro_ver)
         if repo:
             setup_addition_repo(ceph, repo)
-        if hotfix_repo:
-            setup_hotfix_repo(ceph, hotfix_repo)
         # TODO enable only python3 rpms on both rhel7 &rhel8 once all component suites(rhcs3,4) are comptatible
         if distro_ver.startswith("8"):
             rpm_all_packages = rpm_packages.get("py3") + ["net-tools"]
