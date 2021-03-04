@@ -46,10 +46,6 @@ def run(**kw):
     base_url = config.get("base_url", None)
     installer_url = config.get("installer_url", None)
 
-    ceph_cluster.setup_packages(
-        base_url, hotfix_repo, installer_url, ubuntu_repo, rhbuild
-    )
-
     with parallel() as p:
         for ceph in ceph_nodes:
             p.spawn(
@@ -62,6 +58,11 @@ def run(**kw):
                 enable_eus,
             )
             time.sleep(20)
+
+    ceph_cluster.ansible_config = dict(dedicated_devices=[])
+    ceph_cluster.setup_packages(
+        base_url, hotfix_repo, installer_url, ubuntu_repo, rhbuild
+    )
     return 0
 
 
