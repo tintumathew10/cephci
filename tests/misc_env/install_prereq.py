@@ -41,6 +41,9 @@ def run(**kw):
     repo = config.get("add-repo", False)
     hotfix_repo = config.get("hotfix_repo", False)
     rhbuild = config.get("rhbuild")
+    ubuntu_repo = config.get("ubuntu_repo", None)
+    base_url = config.get("base_url", None)
+    installer_url = config.get("installer_url", None)
 
     with parallel() as p:
         for ceph in ceph_nodes:
@@ -53,6 +56,9 @@ def run(**kw):
                 rhbuild,
                 enable_eus,
                 hotfix_repo,
+                base_url,
+                ubuntu_repo,
+                installer_url,
             )
             time.sleep(20)
     return 0
@@ -66,6 +72,9 @@ def install_prereq(
     rhbuild=None,
     enable_eus=False,
     hotfix_repo=None,
+    base_url=None,
+    ubuntu_repo=None,
+    installer_url=None,
 ):
     log.info("Waiting for cloud config to complete on " + ceph.hostname)
     ceph.exec_command(cmd="while [ ! -f /ceph-qa-ready ]; do sleep 15; done")
@@ -78,6 +87,9 @@ def install_prereq(
     log.info("distro id: {id}".format(id=distro_info["ID"]))
     log.info(
         "distro version_id: {version_id}".format(version_id=distro_info["VERSION_ID"])
+    )
+    ceph_cluster.setup_packages(
+        base_url, hotfix_repo, installer_url, ubuntu_repo, rhbuild
     )
     if ceph.pkg_type == "deb":
         ceph.exec_command(
