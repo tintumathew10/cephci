@@ -34,6 +34,7 @@ deb_all_packages = " ".join(deb_packages)
 def run(**kw):
     log.info("Running test")
     ceph_nodes = kw.get("ceph_nodes")
+    ceph_cluster = kw.get("ceph_cluster")
     # skip subscription manager if testing beta RHEL
     config = kw.get("config")
     skip_subscription = config.get("skip_subscription", False)
@@ -45,6 +46,10 @@ def run(**kw):
     base_url = config.get("base_url", None)
     installer_url = config.get("installer_url", None)
 
+    ceph_cluster.setup_packages(
+        base_url, hotfix_repo, installer_url, ubuntu_repo, rhbuild
+    )
+
     with parallel() as p:
         for ceph in ceph_nodes:
             p.spawn(
@@ -55,10 +60,6 @@ def run(**kw):
                 repo,
                 rhbuild,
                 enable_eus,
-                hotfix_repo,
-                base_url,
-                ubuntu_repo,
-                installer_url,
             )
             time.sleep(20)
     return 0
@@ -71,10 +72,6 @@ def install_prereq(
     repo=False,
     rhbuild=None,
     enable_eus=False,
-    hotfix_repo=None,
-    base_url=None,
-    ubuntu_repo=None,
-    installer_url=None,
 ):
     log.info("Waiting for cloud config to complete on " + ceph.hostname)
     ceph.exec_command(cmd="while [ ! -f /ceph-qa-ready ]; do sleep 15; done")
@@ -87,9 +84,6 @@ def install_prereq(
     log.info("distro id: {id}".format(id=distro_info["ID"]))
     log.info(
         "distro version_id: {version_id}".format(version_id=distro_info["VERSION_ID"])
-    )
-    ceph.setup_packages(
-        base_url, hotfix_repo, installer_url, ubuntu_repo, rhbuild
     )
     if ceph.pkg_type == "deb":
         ceph.exec_command(
