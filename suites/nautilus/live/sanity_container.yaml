@@ -46,7 +46,7 @@ tests:
               mon_allow_pool_delete: true
             client:
               rgw crypt require ssl: false
-              rgw crypt s3 kms encryption keys: 
+              rgw crypt s3 kms encryption keys:
                 testkey-1=YmluCmJvb3N0CmJvb3N0LWJ1aWxkCmNlcGguY29uZgo=
                 testkey-2=aWIKTWFrZWZpbGUKbWFuCm91dApzcmMKVGVzdGluZwo=
         cephfs_pools:

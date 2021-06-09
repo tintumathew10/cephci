@@ -41,7 +41,7 @@ tests:
             mon_allow_pool_delete: True
           client:
             rgw crypt require ssl: false
-            rgw crypt s3 kms encryption keys: 
+            rgw crypt s3 kms encryption keys:
               testkey-1=YmluCmJvb3N0CmJvb3N0LWJ1aWxkCmNlcGguY29uZgo=
               testkey-2=aWIKTWFrZWZpbGUKbWFuCm91dApzcmMKVGVzdGluZwo=
     desc: test cluster 4.x cdn setup using ceph-ansible
