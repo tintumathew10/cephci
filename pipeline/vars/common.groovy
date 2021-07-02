@@ -34,7 +34,7 @@ def getCLIArgsFromMessage() {
         print "Before"
         print "${env.composeUrl}"
         print "after"
-        env.composeUrl = env.composeUrl?.trim() ?: jsonCIMsg.compose_url
+        env.composeUrl = env.composeUrl ?: jsonCIMsg.compose_url
         print env.composeUrl
         print "composing"
         
