@@ -105,7 +105,8 @@ def executeTest(def cmd, def instanceName) {
             println err.getMessage()
             error "Encountered an error"
         } finally {
-            cleanUp(instanceName)
+            //cleanUp(instanceName)
+            println "do nothing.."
         }
     }
 
