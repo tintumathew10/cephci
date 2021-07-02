@@ -34,9 +34,10 @@ def getCLIArgsFromMessage() {
         print "Before"
         print "${env.composeUrl}"
         print "after"
-        if (! "${env.composeUrl}" ) {
-            env.composeUrl = jsonCIMsg.compose_url
-        }
+        env.composeUrl = env.composeUrl?.trim() ?: jsonCIMsg.compose_url
+        print env.composeUrl
+        print "composing"
+        
 
         // get rhbuild value from RHCEPH-5.0-RHEL-8.yyyymmdd.ci.x
         env.rhcephVersion = env.composeId.substring(7,17).toLowerCase()
