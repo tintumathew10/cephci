@@ -36,6 +36,7 @@ def one_time_setup(node, rhbuild, branch: str) -> None:
         return
     except BaseException:  # noqa
         pass
+
     os_ver = rhbuild.split("-")[-1]
 
     EPEL_RPM = (
