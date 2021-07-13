@@ -25,7 +25,7 @@ def one_time_setup(node, rhbuild, branch: str) -> None:
     Installs the pre-requisites for executing the tests.
 
     Args:
-        node:   The node object participating in the test
+        node:  The node object participating in the test
         branch: The branch that needs to be cloned
         rhbuild: specification of rhbuild. ex: 4.3-rhel-7
     """
