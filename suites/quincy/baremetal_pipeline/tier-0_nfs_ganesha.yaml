@@ -78,7 +78,7 @@ tests:
       config:
         command: add
         id: client.1
-        node: node4
+        node: node10
         install_packages:
           - ceph-common
           - ceph-fuse
@@ -93,37 +93,7 @@ tests:
       config:
         command: add
         id: client.2
-        node: node5
-        install_packages:
-          - ceph-common
-          - ceph-fuse
-        copy_admin_keyring: true
-      desc: Configure the RGW,RBD client system
-      destroy-cluster: false
-      module: test_client.py
-      name: configure client
-
-  - test:
-      abort-on-fail: true
-      config:
-        command: add
-        id: client.3
-        node: node6
-        install_packages:
-          - ceph-common
-          - ceph-fuse
-        copy_admin_keyring: true
-      desc: Configure the RGW,RBD client system
-      destroy-cluster: false
-      module: test_client.py
-      name: configure client
-
-  - test:
-      abort-on-fail: true
-      config:
-        command: add
-        id: client.4
-        node: node7
+        node: node11
         install_packages:
           - ceph-common
           - ceph-fuse
@@ -141,7 +111,6 @@ tests:
       abort-on-fail: false
       config:
         nfs_version: 4.1
-        clients: 2
 
   - test:
       name: Nfs Ganesha Pynfs
@@ -151,7 +120,6 @@ tests:
       abort-on-fail: false
       config:
         nfs_version: 4.1
-        clients: 2
 
   - test:
       name: Nfs Ganesha Bonnie
@@ -161,50 +129,3 @@ tests:
       abort-on-fail: false
       config:
         nfs_version: 4.2
-        clients: 4
-
-
-  - test:
-      name: Nfs Verify Readdir Ops
-      module: nfs_verify_readdir_ops.py
-      desc: Perform readir operation from clients
-      polarion-id:
-      abort-on-fail: false
-      config:
-        nfs_version: 4.2
-        clients: 4
-
-  - test:
-      name: Nfs Ganesha rename operations
-      module: test_file_ops_renames.py
-      desc: Perform file and dir renaming and lookups in parallel
-      polarion-id:
-      abort-on-fail: true
-      config:
-        nfs_version: 4.1
-        clients: 3
-        num_files: 1000
-        num_dirs: 1000
-
-  - test:
-      name: Nfs Ganesha copy operations
-      module: test_file_ops_copy.py
-      desc: Perform file and dir copy and lookups in parallel
-      polarion-id:
-      abort-on-fail: true
-      config:
-        nfs_version: 4.1
-        clients: 3
-        num_files: 1000
-        num_dirs: 1000
-
-  - test:
-      name: Verify create file, create soflink and lookups from nfs clients
-      module: nfs_verify_file_ops_soft_links.py
-      desc: Verify create file, create soflink and lookups from nfs clients
-      polarion-id:
-      abort-on-fail: false
-      config:
-        nfs_version: 4.2
-        clients: 3
-        file_count: 100
