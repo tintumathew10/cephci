@@ -92,6 +92,7 @@ def cleanup(
 
         if (max_age - 1) > node_age.days > (max_age // 2):
             if user_.name == "psi-ceph-jenkins":
+                print(f"psi-ceph-jenkins node.name ------{node.name}")
                 return
 
             add_key_to_ref(results, "warn", user_.email, node.name, tenant)
@@ -151,6 +152,7 @@ def send_email(payload: Dict) -> list:
     for email, ct in payload.items():
         if email is not None:
             recipient = email
+            print(f"recipient -- {recipient}")
 
             msg = MIMEMultipart("alternative")
             msg[
@@ -197,9 +199,10 @@ def send_email(payload: Dict) -> list:
             part1 = MIMEText(html, "html")
             msg.attach(part1)
             s = smtplib.SMTP("localhost")
+            print(f"msg.as_string() ------ {msg.as_string()}")
             s.sendmail(sender, recipient, msg.as_string())
             s.quit()
-
+        print("done sending mail")
     return failed_vm
 
 
@@ -225,6 +228,7 @@ def run(args: Dict) -> int:
         tenants = ["ceph-ci", "ceph-core", "ceph-jenkins"]
         for tenant in tenants:
             driver_ = get_driver(Provider.OPENSTACK)
+            print(f"driver -----{driver_}")
             osp_driver = driver_(
                 osp_cred["username"],
                 osp_cred["password"],
@@ -236,16 +240,19 @@ def run(args: Dict) -> int:
                 ex_domain_name=osp_cred["domain"],
                 ex_tenant_domain_id=osp_cred["tenant-domain-id"],
             )
-
+            print(f"osp_driver ----- {osp_driver}")
             osp_identity = osp_driver.connection.get_auth_class()
             osp_identity.connect()
-
-            with parallel() as p:
-                for node in osp_driver.list_nodes():
-                    p.spawn(cleanup, osp_identity, osp_cred, node, results, tenant)
-
+            try:
+                with parallel() as p:
+                    for node in osp_driver.list_nodes():
+                        print(f"node---- {node}")
+                        p.spawn(cleanup, osp_identity, osp_cred, node, results, tenant)
+            except Exception:
+                pass
+    print(f"sending Email with {results}")
     response = send_email(results)
-
+    print(response)
     if response:
         print(f"Failed to delete Instances/nodes: {response}")
         return 1

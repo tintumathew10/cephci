@@ -39,10 +39,12 @@ def load_file(file_name):
 def execute(cmd, fail_ok=False, merge_stderr=False):
     """Executes specified command for the given action."""
     cmdlist = shlex.split(cmd)
+    print (f"cmd list -- {cmdlist}")
     stdout = subprocess.PIPE
     stderr = subprocess.STDOUT if merge_stderr else subprocess.PIPE
     proc = subprocess.Popen(cmdlist, stdout=stdout, stderr=stderr)
     result, result_err = proc.communicate()
+    print(f"result --- {result}\nresult error --- {result_err}")
     result = result.decode("utf-8")
 
     if not fail_ok and proc.returncode != 0:
@@ -259,9 +261,11 @@ def run(args: Dict) -> None:
             os_nodes = execute(
                 cmd=openstack_basecmd(**os_cred) + " server list -f json"
             )
+            print(f"os nodes ---- {os_nodes}")
             if not os_nodes:
                 continue
             instance_detail = map_userto_instances(os_nodes, os_cred)
+            print(f"instance details --- {instance_detail}")
             quota_stats = get_complete_quota(instance_detail, os_cred, project)
             quota_details.append(quota_stats)
         except CommandFailed as cf:

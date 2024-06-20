@@ -4,13 +4,13 @@
 // Global variables section
 def sharedLib
 
-node("magna006") {
+node("rhel-8-medium") {
     try {
         stage('prepareNode') {
             checkout(
                 scm: [
                     $class: 'GitSCM',
-                    branches: [[name: "origin/master"]],
+                    branches: [[name: "origin/clnup_rhosd"]],
                     extensions: [[
                         $class: 'CleanBeforeCheckout',
                         deleteUntrackedNestedRepositories: true
@@ -25,7 +25,7 @@ node("magna006") {
                         reference: ''
                     ]],
                     userRemoteConfigs: [[
-                        url: "https://github.com/red-hat-storage/cephci.git"
+                        url: "https://github.com/tintumathew10/cephci.git"
                     ]]
                 ],
                 changelog: false,
