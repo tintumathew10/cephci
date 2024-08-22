@@ -10,7 +10,7 @@ node("rhel-9-medium") {
             checkout(
                 scm: [
                     $class: 'GitSCM',
-                    branches: [[name: "origin/master"]],
+                    branches: [[name: "origin/vm_state"]],
                     extensions: [[
                         $class: 'CleanBeforeCheckout',
                         deleteUntrackedNestedRepositories: true
@@ -25,7 +25,7 @@ node("rhel-9-medium") {
                         reference: ''
                     ]],
                     userRemoteConfigs: [[
-                        url: "https://github.com/red-hat-storage/cephci.git"
+                        url: "https://github.com/tintumathew10/cephci.git"
                     ]]
                 ],
                 changelog: false,
@@ -63,9 +63,9 @@ node("rhel-9-medium") {
             subject: "${subject}",
             body: "${body}",
             from: "cephci@redhat.com",
-            to: "cephci@redhat.com"
+            to: "tmathew@redhat.com"
         )
         subject += "\n Jenkins URL: ${env.BUILD_URL}"
-        googlechatnotification(url: "id:rhcephCIGChatRoom", message: subject)
+        // googlechatnotification(url: "id:rhcephCIGChatRoom", message: subject)
     }
 }

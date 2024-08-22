@@ -91,7 +91,7 @@ def cleanup(
         user_ = osp_identity.get_user(node.extra["userId"])
     except Exception as e:
         print(f"For Node:{node.name} unable to find the owner {e}")
-        user_ = SimpleNamespace(name="No_USER", email="cephci@redhat.com")
+        user_ = SimpleNamespace(name="No_USER", email="tmathew@redhat.com")
 
     if node.state.lower() != "error":
         node_age = datetime.now(timezone.utc) - node.created_at

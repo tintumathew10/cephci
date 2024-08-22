@@ -226,6 +226,12 @@ class CephVMNodeV2:
 
         # Gather the current details of the node.
         self.node = self.driver.ex_get_node_details(node_id=self.node.id)
+        print(f"Node name tm --------- {self.node.name}\nNode state ---------- {self.node.state}")
+<<<<<<< HEAD
+        print(f"\nNode locked state ---------- {self.node.extra}")
+=======
+        print(f"\nNode locked state ---------- {self.node.extra}\n\n")
+>>>>>>> 0e194362 (testing vm state)
         if self.node.state == "pending":
             raise NodeDeleteFailure(f"{self.node.name} cannot be deleted.")
 
