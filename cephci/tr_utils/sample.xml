@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<properties>
+		<property name="polarion-project-id" value="CEPH"/>
+		<property name="polarion-testrun-id" value="RHCS-8-1-tier-0_fs-BD85O7"/>
+		<property name="polarion-group-id" value="ceph-build:  ansible-build:  OS distro: RHEL-9.5.0-x86_64-ga-latest"/>
+	</properties>
+	<testsuite name="tier-0_fs" tests="7" errors="0" failures="1" skipped="0" time="2183.616">
+		<properties>
+			<property name="jenkin-url" value=" http://10.70.46.85:8080/job/qe-squid-sanity-openstack/12/"/>
+			<property name="build" value=" 8.1"/>
+			<property name="ceph-version" value=" --NA--"/>
+			<property name="ceph-ansible-version" value=" --NA--"/>
+			<property name="base_url" value=" http://download-01.beak-001.prod.iad2.dc.redhat.com/rhel-9/composes/auto/ceph-8.1-rhel-9/RHCEPH-8.1-RHEL-9-20250411.ci.3"/>
+			<property name="suite-name" value=" suites/squid/cephfs/tier-0_fs.yaml"/>
+			<property name="conf-file" value=" conf/squid/cephfs/tier-0_fs.yaml"/>
+			<property name="polarion-project-id" value=" CEPH"/>
+			<property name="distro" value=" RHEL-9.5.0-x86_64-ga-latest"/>
+			<property name="container-registry" value=" registry-proxy.engineering.redhat.com"/>
+			<property name="container-image" value=" rh-osbs/rhceph"/>
+			<property name="container-tag" value=" ceph-8.1-rhel-9-containers-candidate-23825-20250412014857"/>
+			<property name="compose-id" value=" --NA--"/>
+			<property name="log-dir" value=" /home/jenkins/ceph-builds/openstack/RH/8.1/rhel-9/Sanity/19.2.1-128/12/logs/tier-0_fs"/>
+			<property name="run-id" value=" BD85O7"/>
+			<property name="cloud-type" value=" openstack"/>
+			<property name="instance-name" value=" sanity-ir7MBC"/>
+			<property name="invoked-by" value=" jenkins"/>
+		</properties>
+		<testcase name="setup install pre-requisistes" time="521.268463"/>
+		<testcase name="cluster deployment" time="903.53009">
+			<properties>
+				<property name="polarion-testcase-id" value="CEPH-83573777"/>
+				<property name="test_id" value="141394"/>
+			</properties>
+		</testcase>
+		<testcase name="configure client" time="40.786677">
+			<!-- <properties>
+				<property name="test_id" value="141394"/>
+			</properties> -->
+		</testcase>
+		<testcase name="cephfs default values for mds" time="125.156955">
+			<properties>
+				<property name="polarion-testcase-id" value="CEPH-83574284"/>
+				<property name="test_id" value="140708"/>
+			</properties>
+		</testcase>
+		<testcase name="cephfs-basics" time="207.55885">
+			<properties>
+				<property name="polarion-testcase-id" value="CEPH-11293"/>
+				<property name="test_id" value="140851"/>
+			</properties>
+		</testcase>
+		<testcase name="nfs-ganesha_with_cephfs" time="302.416719">
+			<failure type="error"/>
+			<properties>
+				<property name="polarion-testcase-id" value="CEPH-83574439"/>
+				<property name="test_id" value="140743"/>
+			</properties>
+		</testcase>
+		<testcase name="Increase and Decrease of MDS" time="82.898409">
+			<properties>
+				<property name="polarion-testcase-id" value="CEPH-83574286"/>
+				<property name="test_id" value="140707"/>
+			</properties>
+		</testcase>
+	</testsuite>
+</testsuites>
