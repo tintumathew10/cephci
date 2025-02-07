@@ -585,6 +585,10 @@ def run(args):
         details["polarion-id-link"] = "{}{}".format(
             polarion_default_url, details["polarion-id"]
         )
+        details["testrail-id"] = var.get("testrail-id")
+        print('details["testrail-id"] = %s' % details["testrail-id"])
+        # import pdb;
+        # pdb.set_trace()
         details["rhbuild"] = rhbuild
         details["cloud-type"] = cloud_type
         details["ceph-version"] = ceph_version
