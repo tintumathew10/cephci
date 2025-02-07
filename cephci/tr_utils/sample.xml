@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testsuite name="bvt" tests="7" errors="0" failures="0" skipped="0" time="2295.679">
+		<properties>
+			<property name="jenkin-url" value=" https://jenkins-csb-rhgsocs3x-ocs3xstage.dno.corp.redhat.com/job/qe-squid-sanity-openstack/294/"/>
+			<property name="build" value=" 8.1"/>
+			<property name="ceph-version" value=" --NA--"/>
+			<property name="ceph-ansible-version" value=" --NA--"/>
+			<property name="base_url" value=" https://public.dhe.ibm.com/ibmdl/export/pub/storage/ceph/testing/IBM-CEPH-8.1-202503201905.ci.0/IBM-CEPH-8.1-202503201905.ci.0-rhel9.repo"/>
+			<property name="suite-name" value=" suites/squid/smoke/bvt.yaml"/>
+			<property name="conf-file" value=" conf/squid/smoke/1admin-4node-1client-bvt.yaml"/>
+			<property name="polarion-project-id" value=" CEPH"/>
+			<property name="distro" value=" RHEL-9.5.0-x86_64-ga-latest"/>
+			<property name="container-registry" value=" cp.stg.icr.io"/>
+			<property name="container-image" value=" cp/ibm-ceph/ceph-8-rhel9"/>
+			<property name="container-tag" value=" 8-99"/>
+			<property name="compose-id" value=" --NA--"/>
+			<property name="log-dir" value=" /home/jenkins/ceph-builds/openstack/IBM/8.1/rhel-9/Sanity/19.2.1-57/294/logs/bvt"/>
+			<property name="run-id" value=" 3QIK6F"/>
+			<property name="cloud-type" value=" openstack"/>
+			<property name="instance-name" value=" sanity-g7cJaV"/>
+			<property name="invoked-by" value=" jenkins"/>
+		</properties>
+        <testcase name="setup pre-requisites" time="513.505182"/>
+		<testcase name="Deploy cluster using cephadm" time="722.330843">
+			<properties>
+				<property name="test_id" value="C1985"/>
+                <property name="polarion-testcase-id" value="CEPH-83573713"/>
+			</properties>
+		</testcase>
+        <testcase name="configure client" time="32.679189"/>
+        <testcase name="Test M buckets with N objects" time="0.0"/>
+        <testcase name="cephfs-basics" time="0.0"/>
+        <testcase name="Run RBD tier-0 operations" time="0.0"/>
+        <testcase name="Executes RGW, RBD and FS operations" time="1027.163976"/>
+	</testsuite>
+</testsuites>
