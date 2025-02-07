@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<properties>
+		<property name="polarion-project-id" value="CEPH"/>
+		<property name="polarion-testrun-id" value="RHCS-8-0-bvt-NI0BH6"/>
+		<property name="polarion-group-id" value="ceph-build:  ansible-build:  OS distro: RHEL-9.5.0-x86_64-ga-latest"/>
+	</properties>
+	<testsuite name="bvt" tests="7" errors="0" failures="0" skipped="0" time="2101.63">
+		<properties>
+			<property name="jenkin-url" value=" --NA--"/>
+			<property name="build" value=" 8.0"/>
+			<property name="ceph-version" value=" --NA--"/>
+			<property name="ceph-ansible-version" value=" --NA--"/>
+			<property name="base_url" value=" https://s3.upshift.redhat.com/ceph-composes/RHCEPH-8.0-RHEL-9-20250326.0/RHCEPH-8.0-RHEL-9-20250326.0.repo"/>
+			<property name="suite-name" value=" suites/squid/smoke/bvt.yaml"/>
+			<property name="conf-file" value=" conf/squid/smoke/1admin-4node-1client-bvt.yaml"/>
+			<property name="polarion-project-id" value=" CEPH"/>
+			<property name="distro" value=" RHEL-9.5.0-x86_64-ga-latest"/>
+			<property name="container-registry" value=" registry-proxy.engineering.redhat.com"/>
+			<property name="container-image" value=" rh-osbs/rhceph"/>
+			<property name="container-tag" value=" 8-342"/>
+			<property name="compose-id" value=" --NA--"/>
+			<property name="log-dir" value=" /tmp/cephci-run-NI0BH6"/>
+			<property name="run-id" value=" NI0BH6"/>
+			<property name="cloud-type" value=" openstack"/>
+			<property name="instance-name" value=" tm1_sanity"/>
+			<property name="invoked-by" value=" tintumathew"/>
+		</properties>
+		<testcase name="setup pre-requisites" time="467.890127"/>
+		<testcase name="Deploy cluster using cephadm" time="771.87827">
+			<properties>
+				<property name="polarion-testcase-id" value="CEPH-83573713"/>
+				<property name="test_id" value="C5745"/>
+			</properties>
+		</testcase>
+		<testcase name="configure client" time="45.996549"/>
+		<testcase name="Test M buckets with N objects" time="0.0"/>
+		<testcase name="cephfs-basics" time="0.0"/>
+		<testcase name="Run RBD tier-0 operations" time="0.0"/>
+		<testcase name="Executes RGW, RBD and FS operations" time="815.865543"/>
+	</testsuite>
+</testsuites>
