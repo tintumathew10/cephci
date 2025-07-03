@@ -11,6 +11,7 @@ tests:
       desc: Install software pre-requisites for cluster deployment.
       module: install_prereq.py
       name: setup pre-requisites
+      comments: Known issue BZ-6789 with Install software pre-requisites for cluster deployment. - setup pre-requisites - Validate package versions - Install software pre-requisites for cluster deployment
 
   - test:
       abort-on-fail: true
