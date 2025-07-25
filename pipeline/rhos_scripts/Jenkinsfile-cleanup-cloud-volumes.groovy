@@ -10,7 +10,7 @@ node("rhel-8-medium") {
         checkout(
                 scm: [
                     $class: 'GitSCM',
-                    branches: [[name: "origin/main"]],
+                    branches: [[name: "origin/clup"]],
                     extensions: [[
                         $class: 'CleanBeforeCheckout',
                         deleteUntrackedNestedRepositories: true
@@ -25,14 +25,14 @@ node("rhel-8-medium") {
                         reference: ''
                     ]],
                     userRemoteConfigs: [[
-                        url: "https://github.com/red-hat-storage/cephci.git"
+                        url: "https://github.com/tintumathew10/cephci.git"
                     ]]
                 ],
                 changelog: false,
                 poll: false
             )
-        sharedLib = load("${env.WORKSPACE}/pipeline/vars/common.groovy")
-        sharedLib.prepareNode()
+        sharedLib = load("${env.WORKSPACE}/pipeline/vars/v3.groovy")
+        sharedLib.prepareNode(2)
     }
 
     stage('cleanUp') {
